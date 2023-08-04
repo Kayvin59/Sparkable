@@ -1,0 +1,12 @@
+{
+  "pattern": "**/*.{ts,tsx}",
+  "threshold": 0,
+  "reporters": ["html", "console"],
+  "ignore": [
+    "**/dist/**",
+    "**/node_modules/**",
+    "**/*.test.ts"
+  ],
+  "absolute": true,
+  "exitCode": 1
+}

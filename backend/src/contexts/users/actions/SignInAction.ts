@@ -1,5 +1,5 @@
 import bcrypt from 'bcrypt';
-import { UserNotFoundException } from '../domain/exceptions/UserNotFoundException';
+import { UserNotFoundException } from '../../_shared/domain/exceptions/UserNotFoundException';
 import { WrongPasswordException } from '../domain/exceptions/WrongPasswordException';
 import { UserRepository } from '../domain/repositories/UserRepository';
 import { AuthService } from '../domain/services/AuthService';

@@ -25,13 +25,16 @@ jobs:
         echo "AUTH0_CLIENT_ID=${{ secrets.AUTH0_CLIENT_ID }}" >> .env
         echo "AUTH0_CLIENT_SECRET=${{ secrets.AUTH0_CLIENT_SECRET }}" >> .env
         echo "MAIL_HOST=${{ secrets.MAIL_HOST }}" >> .env
-        echo "MAIL_USER=${{ secrets.MAIL_USER }}" >> .env
+        echo "MAIL_USER=support@sparkable.cc" >> .env
         echo "MAIL_PASSWORD=${{ secrets.MAIL_PASSWORD }}" >> .env
 
     - name: Start docker containers
       run: |
         docker-compose -f docker-compose-test.yml up --build --detach
         sleep 10  # wait for database to be ready
+
+    - name: Run copy paste detector
+      run: docker-compose exec -T backend npm run cpd
 
     - name: Run backend unit tests
       run: docker-compose exec -T backend npm run unit

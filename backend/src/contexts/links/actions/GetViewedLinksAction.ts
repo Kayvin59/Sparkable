@@ -1,4 +1,4 @@
-import { MandatoryFieldEmptyException } from '../../users/domain/exceptions/MandatoryFieldEmptyException';
+import { MandatoryFieldEmptyException } from '../../_shared/domain/exceptions/MandatoryFieldEmptyException';
 import { LinkDto } from '../domain/models/LinkDto';
 import { LinkRepository } from '../domain/repositories/LinkRepository';
 import { ViewedLinkByUserDataRepository } from '../domain/repositories/ViewedLinkByUserDataRepository';

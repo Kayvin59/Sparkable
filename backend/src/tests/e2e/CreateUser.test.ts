@@ -55,7 +55,7 @@ describe('POST /user', () => {
     expect(users[0].stage).toEqual(1);
   });
 
-  it('returns 403 when one unique field exists with the same value', async () => {
+  it('returns 403 when email exists', async () => {
     await request(app).post('/user').send({
       email: 'admin@butterfy.me',
       username: 'admin',
@@ -64,10 +64,27 @@ describe('POST /user', () => {
 
     const res = await request(app).post('/user').send({
       email: 'admin@butterfy.me',
+      username: 'admin2',
+      password: 'password',
+    });
+    expect(res.statusCode).toEqual(403);
+    expect(res.body.message).toEqual('User exist!');
+  });
+
+  it('returns 403 when username exists', async () => {
+    await request(app).post('/user').send({
+      email: 'admin@butterfy.me',
+      username: 'admin',
+      password: 'password',
+    });
+
+    const res = await request(app).post('/user').send({
+      email: 'admin2@butterfy.me',
       username: 'admin',
       password: 'password',
     });
     expect(res.statusCode).toEqual(403);
     expect(res.body.message).toEqual('User exist!');
   });
+
 });

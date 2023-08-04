@@ -1,4 +1,4 @@
-import { MandatoryFieldEmptyException } from '../../../users/domain/exceptions/MandatoryFieldEmptyException';
+import { MandatoryFieldEmptyException } from '../../../_shared/domain/exceptions/MandatoryFieldEmptyException';
 import { ViewedLinkByUserDataDto } from './ViewedLinkByUserDataDto';
 
 export class ViewedLinkByUserData {

@@ -1,4 +1,4 @@
-@import "./common.scss";
+@import './common.scss';
 
 .aboutContainer {
   width: 100%;
@@ -27,10 +27,14 @@
 
 .titleTag {
   font-size: 1.25rem;
-  color: #1991FF;
+  color: #1991ff;
   margin-bottom: 20px;
   text-align: center;
-  font-family: "Work Sans";
+  font-family: 'Work Sans';
+
+  @media only screen and (max-width: $tablet) {
+    margin-top: 60px;
+  }
 }
 
 .aboutText {
@@ -47,9 +51,9 @@
 }
 
 .aboutListItem {
- @extend .aboutText;
+  @extend .aboutText;
 
- margin-left: 35px;
+  margin-left: 35px;
 }
 
 .center {
@@ -85,12 +89,12 @@
 .whiteButton {
   @extend .aboutButton;
   border: 1px solid rgba(39, 41, 55, 0.35);
-  background: #FFF;
+  background: #fff;
 }
 
 .blueButton {
   @extend .aboutButton;
-  background: #1991FF;
+  background: #1991ff;
   color: #fff;
 }
 
@@ -98,32 +102,32 @@
   color: $colorBlack;
 
   &:after {
-    content: url("../public/svg/about-arrow-down.svg");
+    content: url('../public/svg/about-arrow-down.svg');
   }
 }
 
 .whitepaper {
   margin-right: 28px;
   &:after {
-    content: url("../public/svg/about-arrow-down-white-with-line.svg");
+    content: url('../public/svg/about-arrow-down-white-with-line.svg');
   }
 
   @media only screen and (max-width: $tablet) {
-   margin: 0 10px 20px; 
+    margin: 0 10px 20px;
   }
 }
 
 .explore {
   color: $colorBlack;
-  
+
   &:after {
-    content: url("../public/svg/about-arrow-right-black.svg");
+    content: url('../public/svg/about-arrow-right-black.svg');
   }
 }
 
 .joinSlack {
   &:after {
-    content: url("../public/svg/slack-white-icon.svg");
+    content: url('../public/svg/slack-white-icon.svg');
   }
 }
 
@@ -131,13 +135,13 @@
   color: $colorBlack;
 
   &:after {
-    content: url("../public/svg/mail-black-icon.svg");
+    content: url('../public/svg/mail-black-icon.svg');
   }
 }
 
 .submit {
   &:after {
-    content: url("../public/svg/about-arrow-right-white.svg");
+    content: url('../public/svg/about-arrow-right-white.svg');
   }
 }
 
@@ -151,7 +155,7 @@
   background-position: center top;
 
   @media only screen and (max-width: $tablet) {
-    padding-top: 190px;  
+    padding-top: 190px;
     padding-bottom: 45px;
     background-size: cover;
   }
@@ -207,6 +211,7 @@
   display: flex;
   margin-top: 20px;
   flex-wrap: wrap;
+  justify-content: center;
 
   @media only screen and (max-width: $tablet) {
     justify-content: center;
@@ -316,7 +321,6 @@
 }
 
 .teamVacanciesList {
-
 }
 
 .teamVacanciesListWrapper {
@@ -327,9 +331,9 @@
   padding-left: 10px;
 
   &:before {
-    content: "•";
+    content: '•';
     display: inline-flex;
-    color: #272937BF;
+    color: #272937bf;
     position: relative;
     top: -2px;
     left: -5px;
@@ -363,7 +367,7 @@
   height: 52px;
   border-radius: 8px;
   border: 1px solid rgba(39, 41, 55, 0.12);
-  background: #FFF;
+  background: #fff;
   padding: 0 20px;
   font-size: 16px;
   font-weight: 400;
@@ -403,7 +407,7 @@
 .participateWrapper {
   padding: 80px 0 60px;
 
-  @media only screen and (max-width: $tablet){
+  @media only screen and (max-width: $tablet) {
     padding: 35px 0 0;
   }
 }

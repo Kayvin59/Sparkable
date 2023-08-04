@@ -1,6 +1,6 @@
 import { describe, expect, test } from '@jest/globals';
-import { MandatoryFieldEmptyException } from '../../users/domain/exceptions/MandatoryFieldEmptyException';
-import { UserNotFoundException } from '../../users/domain/exceptions/UserNotFoundException';
+import { MandatoryFieldEmptyException } from '../../_shared/domain/exceptions/MandatoryFieldEmptyException';
+import { UserNotFoundException } from '../../_shared/domain/exceptions/UserNotFoundException';
 import { User } from '../../users/domain/models/User';
 import { UserRepository } from '../../users/domain/repositories/UserRepository';
 import { UserRepositoryInMemory } from '../../users/infrastructure/persistence/repositories/UserRepositoryInMemory';
@@ -12,21 +12,27 @@ import { LinkRepository } from '../domain/repositories/LinkRepository';
 import { CategoryRepositoryInMemory } from '../infrastructure/persistence/repositories/CategoryRepositoryInMemory';
 import { LinkRepositoryInMemory } from '../infrastructure/persistence/repositories/LinkRepositoryInMemory';
 import { CreateLinkAction } from './CreateLinkAction';
+import { MockProxy, mock } from 'jest-mock-extended';
+import { MailerService } from '../../users/domain/services/MailerService';
+import { CheckUserExistsService } from '../../_shared/domain/services/CheckUserExistsService';
 
 describe('Create link action', () => {
   let createLinkAction: CreateLinkAction;
   let linkRepository: LinkRepository;
   let categoryRepository: CategoryRepository;
   let userRepository: UserRepository;
+  let mailServiceMock: MockProxy<MailerService>;
 
   beforeEach(async () => {
     linkRepository = new LinkRepositoryInMemory();
     categoryRepository = new CategoryRepositoryInMemory();
     userRepository = new UserRepositoryInMemory();
+    mailServiceMock = mock<MailerService>();
     createLinkAction = new CreateLinkAction(
       linkRepository,
       categoryRepository,
-      userRepository
+      new CheckUserExistsService(userRepository),
+      mailServiceMock
     );
   });
 
@@ -114,7 +120,8 @@ describe('Create link action', () => {
     createLinkAction = new CreateLinkAction(
       linkRepository,
       categoryRepository,
-      userRepository
+      new CheckUserExistsService(userRepository),
+      mailServiceMock
     );
 
     await expect(
@@ -145,7 +152,8 @@ describe('Create link action', () => {
     createLinkAction = new CreateLinkAction(
       linkRepository,
       categoryRepository,
-      userRepository
+      new CheckUserExistsService(userRepository),
+      mailServiceMock
     );
 
     const url = 'http://example';
@@ -188,7 +196,8 @@ describe('Create link action', () => {
     createLinkAction = new CreateLinkAction(
       linkRepository,
       categoryRepository,
-      userRepository
+      new CheckUserExistsService(userRepository),
+      mailServiceMock
     );
 
     await createLinkAction.execute({
@@ -204,6 +213,26 @@ describe('Create link action', () => {
     expect(links[0].title).toEqual(title);
     expect(links[0].url).toEqual(url);
     expect(links[0].categories).toEqual([categoryDto]);
+
+    expect(mailServiceMock.sendEmail).toHaveBeenCalled();
+    const link = `${process.env.CLIENT}/article/${links[0].id}}`;
+    expect(mailServiceMock.sendEmail).toHaveBeenCalledWith({
+      from: 'support@sparkable.cc',
+      to: 'support@sparkable.cc',
+      subject: 'New link has been created!',
+      html: `
+        <html>
+        <head>
+            <style>
+            </style>
+        </head>
+        <body>
+            <p>A new link has been created!</p>
+            <p><a href="${link}">${links[0].title}</a></p>
+        </body>
+        </html>
+        `,
+    });
   });
 
   test('create link with optional field', async () => {
@@ -231,7 +260,8 @@ describe('Create link action', () => {
     createLinkAction = new CreateLinkAction(
       linkRepository,
       categoryRepository,
-      userRepository
+      new CheckUserExistsService(userRepository),
+      mailServiceMock
     );
 
     await createLinkAction.execute({

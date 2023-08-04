@@ -1,4 +1,4 @@
-import { MandatoryFieldEmptyException } from '../exceptions/MandatoryFieldEmptyException';
+import { MandatoryFieldEmptyException } from '../../../_shared/domain/exceptions/MandatoryFieldEmptyException';
 import { ShortPasswordException } from '../exceptions/ShortPasswordException';
 import { UserDto } from './UserDto';
 import bcrypt from 'bcrypt';

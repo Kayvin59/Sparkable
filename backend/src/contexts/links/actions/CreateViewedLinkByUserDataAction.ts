@@ -1,9 +1,9 @@
-import { MandatoryFieldEmptyException } from '../../users/domain/exceptions/MandatoryFieldEmptyException';
-import { UserNotFoundException } from '../../users/domain/exceptions/UserNotFoundException';
+import { MandatoryFieldEmptyException } from '../../_shared/domain/exceptions/MandatoryFieldEmptyException';
+import { UserNotFoundException } from '../../_shared/domain/exceptions/UserNotFoundException';
 import { UserRepository } from '../../users/domain/repositories/UserRepository';
 import { GetCurrentCycleService } from '../../voting/domain/services/GetCurrentCycleService';
 import { DataDoesExistException } from '../domain/exceptions/DataDoesExistException';
-import { LinkNotFoundException } from '../domain/exceptions/LinkNotFoundException';
+import { LinkNotFoundException } from '../../_shared/domain/exceptions/LinkNotFoundException';
 import { ViewedLinkByUserData } from '../domain/models/ViewedLinkByUserData';
 import { LinkRepository } from '../domain/repositories/LinkRepository';
 import { ViewedLinkByUserDataRepository } from '../domain/repositories/ViewedLinkByUserDataRepository';

@@ -9,7 +9,7 @@ export interface LinkRepository {
     stage?: number
   ) => Promise<[LinkDto[], number]>;
   getLinkById: (id: number) => Promise<LinkDto | null>;
-  storeLink: (link: Link) => void;
+  storeLink: (link: Link) => Promise<number>;
   findLink: (field: string, value: string) => Promise<LinkDto | null>;
   getLinkCollectionNotOwned: (
     uuidCollection: Array<string>,

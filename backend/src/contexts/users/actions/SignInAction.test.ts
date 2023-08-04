@@ -1,5 +1,5 @@
 import { describe, expect, test } from '@jest/globals';
-import { UserNotFoundException } from '../domain/exceptions/UserNotFoundException';
+import { UserNotFoundException } from '../../_shared/domain/exceptions/UserNotFoundException';
 import { WrongPasswordException } from '../domain/exceptions/WrongPasswordException';
 import { User } from '../domain/models/User';
 import { UserRepositoryInMemory } from '../infrastructure/persistence/repositories/UserRepositoryInMemory';

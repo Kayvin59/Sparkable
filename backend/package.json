@@ -9,7 +9,8 @@
     "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/server.js\"",
     "unit": "jest --testPathPattern=src/contexts",
     "e2e": "NODE_ENV=test jest --testPathPattern=src/tests --runInBand",
-    "typeorm": "./node_modules/typeorm/cli.js"
+    "typeorm": "./node_modules/typeorm/cli.js",
+    "cpd": "jscpd"
   },
   "keywords": [],
   "license": "MIT",
@@ -46,6 +47,7 @@
     "concurrently": "^7.5.0",
     "jest": "^29.3.1",
     "jest-mock-extended": "^3.0.1",
+    "jscpd": "^3.5.9",
     "nodemon": "^2.0.20",
     "supertest": "^6.3.1",
     "ts-jest": "^29.0.3",

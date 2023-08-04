@@ -3,7 +3,7 @@ import { ViewedLinkByUserData } from "../../links/domain/models/ViewedLinkByUser
 import { ViewedLinkByUserDataRepository } from "../../links/domain/repositories/ViewedLinkByUserDataRepository";
 import { LinkRepositoryInMemory } from "../../links/infrastructure/persistence/repositories/LinkRepositoryInMemory";
 import { ViewedLinkByUserDataRepositoryInMemory } from "../../links/infrastructure/persistence/repositories/ViewedLinkByUserDataRepositoryInMemory";
-import { MandatoryFieldEmptyException } from "../../users/domain/exceptions/MandatoryFieldEmptyException";
+import { MandatoryFieldEmptyException } from "../../_shared/domain/exceptions/MandatoryFieldEmptyException";
 import { UserRepositoryInMemory } from "../../users/infrastructure/persistence/repositories/UserRepositoryInMemory";
 import { LinkNotOpenedByUserException } from "../domain/exceptions/LinkNotOpenedByUserException";
 import { NumberOfVotesExceededException } from "../domain/exceptions/NumberOfVotesExceededException";

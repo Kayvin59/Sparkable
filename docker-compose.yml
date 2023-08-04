@@ -75,7 +75,7 @@ services:
   #     - client-side
 
 networks:
-  client-side: {}
+  #client-side: {}
   server-side: {}
 
 volumes:

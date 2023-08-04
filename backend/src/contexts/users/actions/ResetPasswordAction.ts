@@ -1,7 +1,7 @@
-import { MandatoryFieldEmptyException } from "../domain/exceptions/MandatoryFieldEmptyException";
+import { MandatoryFieldEmptyException } from "../../_shared/domain/exceptions/MandatoryFieldEmptyException";
 import { TokenIsExpiredException } from "../domain/exceptions/TokenIsExpiredException";
 import { TokenNotFoundException } from "../domain/exceptions/TokenNotFoundException";
-import { UserNotFoundException } from "../domain/exceptions/UserNotFoundException";
+import { UserNotFoundException } from "../../_shared/domain/exceptions/UserNotFoundException";
 import { User } from "../domain/models/User";
 import { ResetTokenRepository } from "../domain/repositories/ResetTokenRepository";
 import { UserRepository } from "../domain/repositories/UserRepository";

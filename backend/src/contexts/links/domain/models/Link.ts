@@ -1,4 +1,4 @@
-import { MandatoryFieldEmptyException } from '../../../users/domain/exceptions/MandatoryFieldEmptyException';
+import { MandatoryFieldEmptyException } from '../../../_shared/domain/exceptions/MandatoryFieldEmptyException';
 import { CategoryRestrictionException } from '../exceptions/CategoryRestrictionException';
 import { CategoryDto } from './CategoryDto';
 import { LinkDto } from './LinkDto';
@@ -76,6 +76,10 @@ export class Link {
       suggestionCategory: this.suggestionCategory,
       stage: this.stage
     };
+  }
+
+  public setId(id:number) {
+    this.id = id;
   }
 
   private isACategoryDto(object: any): object is CategoryDto {

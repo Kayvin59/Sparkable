@@ -1,5 +1,5 @@
-import { UserNotFoundException } from '../../users/domain/exceptions/UserNotFoundException';
-import { UserRepository } from '../../users/domain/repositories/UserRepository';
+import { CheckUserExistsService } from '../../_shared/domain/services/CheckUserExistsService';
+import { MailerService } from '../../users/domain/services/MailerService';
 import { CategoryNotFoundException } from '../domain/exceptions/CategoryNotFoundException';
 import { LinkExistsException } from '../domain/exceptions/LinkExistsException';
 import { Link } from '../domain/models/Link';
@@ -7,41 +7,38 @@ import { CategoryRepository } from '../domain/repositories/CategoryRepository';
 import { LinkRepository } from '../domain/repositories/LinkRepository';
 
 export class CreateLinkAction {
-  linkRepository: LinkRepository;
-  categoryRepository: CategoryRepository;
-  userRepository: UserRepository;
+  private linkRepository: LinkRepository;
+  private categoryRepository: CategoryRepository;
+  private checkUserExistsService: CheckUserExistsService;
+  private mailerService: MailerService;
 
   constructor(
     linkRepository: LinkRepository,
     categoryRepository: CategoryRepository,
-    userRepository: UserRepository
+    checkUserExistsService: CheckUserExistsService,
+    mailerService: MailerService
   ) {
     this.linkRepository = linkRepository;
     this.categoryRepository = categoryRepository;
-    this.userRepository = userRepository;
+    this.checkUserExistsService = checkUserExistsService;
+    this.mailerService = mailerService;
   }
 
   async execute(linkData: any) {
     const link = new Link(linkData);
     await this.checkExistsCategories(link);
-    const user = await this.checkUserExists(link);
+    const user = await this.checkUserExistsService.execute(link.userUuid);
     await this.checkUrlIsNew(link);
     link.username = user.username;
-    await this.linkRepository.storeLink(link);
+    const linkId = await this.linkRepository.storeLink(link);
+    link.setId(linkId);
+    this.sendEmail(link);
   }
 
   private async checkUrlIsNew(linkData: any) {
     const linkExists = await this.linkRepository.findLink('url', linkData.url);
     if (linkExists)
       throw new LinkExistsException();
-  }
-
-  private async checkUserExists(link: Link) {
-    const user = await this.userRepository.findUser({ uuid: link.userUuid });
-    if (!user)
-      throw new UserNotFoundException();
-
-    return user;
   }
 
   private async checkExistsCategories(link: Link) {
@@ -51,6 +48,30 @@ export class CreateLinkAction {
       if (category === null)
         throw new CategoryNotFoundException();
     }
+  }
+
+  private async sendEmail(link: Link) {
+    const href = `${process.env.CLIENT}/article/${link.id}}`;
+
+    const mailOptions = {
+      from: 'support@sparkable.cc',
+      to: 'support@sparkable.cc',
+      subject: 'New link has been created!',
+      html: `
+        <html>
+        <head>
+            <style>
+            </style>
+        </head>
+        <body>
+            <p>A new link has been created!</p>
+            <p><a href="${href}">${link.title}</a></p>
+        </body>
+        </html>
+        `,
+    };
+
+    this.mailerService.sendEmail(mailOptions);
   }
 
 }

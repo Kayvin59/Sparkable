@@ -21,7 +21,7 @@ export class LinkRepositoryInMemory implements LinkRepository {
     return new Promise((resolve) => resolve(this.links[0]));
   }
 
-  async storeLink(link: Link): Promise<LinkDto> {
+  async storeLink(link: Link): Promise<number> {
     const linkDto = link.toDto();
     if (await this.findLink('uuid', link.uuid)) {
       this.links.forEach((link, index) => {
@@ -33,7 +33,7 @@ export class LinkRepositoryInMemory implements LinkRepository {
       this.links.push(linkDto);
     }
 
-    return new Promise((resolve) => resolve(link.toDto()));
+    return new Promise((resolve) => resolve(link.toDto().id));
   }
 
   findLink(field: string, value: string): Promise<LinkDto | null> {

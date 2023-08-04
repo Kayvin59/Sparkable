@@ -3,4 +3,5 @@ data
 dist
 postgresdata
 app
+report
 .env

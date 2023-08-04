@@ -4,7 +4,7 @@ import { ViewedLinkByUserData } from "../../links/domain/models/ViewedLinkByUser
 import { ViewedLinkByUserDataDto } from "../../links/domain/models/ViewedLinkByUserDataDto";
 import { LinkRepository } from "../../links/domain/repositories/LinkRepository";
 import { ViewedLinkByUserDataRepository } from "../../links/domain/repositories/ViewedLinkByUserDataRepository";
-import { MandatoryFieldEmptyException } from "../../users/domain/exceptions/MandatoryFieldEmptyException";
+import { MandatoryFieldEmptyException } from "../../_shared/domain/exceptions/MandatoryFieldEmptyException";
 import { UserDto } from "../../users/domain/models/UserDto";
 import { UserRepository } from "../../users/domain/repositories/UserRepository";
 import { LinkNotOpenedByUserException } from "../domain/exceptions/LinkNotOpenedByUserException";

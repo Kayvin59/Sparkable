@@ -1,4 +1,4 @@
-import { MandatoryFieldEmptyException } from '../../users/domain/exceptions/MandatoryFieldEmptyException';
+import { MandatoryFieldEmptyException } from '../../_shared/domain/exceptions/MandatoryFieldEmptyException';
 import { User } from '../../users/domain/models/User';
 import { Link } from '../domain/models/Link';
 import { ViewedLinkByUserData } from '../domain/models/ViewedLinkByUserData';

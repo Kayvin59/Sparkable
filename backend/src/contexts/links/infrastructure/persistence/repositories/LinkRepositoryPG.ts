@@ -3,6 +3,7 @@ import { Link } from '../../../domain/models/Link';
 import { LinkDto } from '../../../domain/models/LinkDto';
 import { LinkRepository } from '../../../domain/repositories/LinkRepository';
 import { LinkEntity } from '../entities/LinkEntity';
+import { resourceUsage } from 'process';
 
 export class LinkRepositoryPG implements LinkRepository {
   private repository;
@@ -38,15 +39,19 @@ export class LinkRepositoryPG implements LinkRepository {
     return this.repository.findOneBy({ id: id });
   }
 
-  async storeLink(link: Link) {
+  async storeLink(link: Link): Promise<number> {
     let linkDto = link.toDto();
     const params = { uuid: linkDto.uuid };
 
-    if (await this.repository.findOneBy(params)) {
-      return this.repository.update(params, {stage: linkDto.stage});
+    const linkPersisted = await this.repository.findOneBy(params)
+
+    if (linkPersisted) {
+      await this.repository.update(params, {stage: linkDto.stage});
+      return linkPersisted.id;
     } else {
       const linkEntity = this.repository.create(linkDto);
-      return this.repository.insert(linkEntity);
+      const result = await this.repository.insert(linkEntity);
+      return result.raw[0].id;
     }
   }
 

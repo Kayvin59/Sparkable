@@ -1,10 +1,10 @@
-import { UserNotFoundException } from "../domain/exceptions/UserNotFoundException";
+import { UserNotFoundException } from "../../_shared/domain/exceptions/UserNotFoundException";
 import { User } from "../domain/models/User";
 import { MailerService } from "../domain/services/MailerService";
 import { ResetTokenRepositoryInMemory } from "../infrastructure/persistence/repositories/ResetTokenRepositoryInMemory";
 import { UserRepositoryInMemory } from "../infrastructure/persistence/repositories/UserRepositoryInMemory";
 import { MockProxy, mock } from 'jest-mock-extended';
-import { MandatoryFieldEmptyException } from "../domain/exceptions/MandatoryFieldEmptyException";
+import { MandatoryFieldEmptyException } from "../../_shared/domain/exceptions/MandatoryFieldEmptyException";
 import { RecoveryPasswordAction } from "./RecoveryPasswordAction";
 
 describe('Recovery password action', () => {
